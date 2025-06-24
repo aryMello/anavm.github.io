@@ -16,14 +16,14 @@ async function loadProjects() {
     );
 
     for (const r of repos) {
-      let readmeHTML = '';
+      let readmeText = '';
       try {
         const readmeRes = await axios.get(`https://api.github.com/repos/aryMello/${r.name}/readme`);
         const decodedContent = atob(readmeRes.data.content || '');
-        readmeHTML = marked.parse(decodedContent); // Convert Markdown to HTML
+        readmeText = decodedContent.split('\n').slice(0, 5).join('\n');
       } catch (err) {
         console.warn(`No README found for ${r.name}`, err);
-        readmeHTML = '<p><em>README not available.</em></p>';
+        readmeText = r.description || 'No description provided.';
       }
 
       const card = document.createElement('div');
@@ -33,7 +33,7 @@ async function loadProjects() {
         <img src="${imageUrl}" alt="${r.name}">
         <div class="project-content">
           <h3><a href="${r.html_url}" target="_blank">${r.name}</a></h3>
-          <div class="readme">${readmeHTML}</div>
+          <pre>${readmeText}</pre>
           <a href="${r.html_url}" target="_blank">View on GitHub →</a>
         </div>`;
       grid.append(card);
