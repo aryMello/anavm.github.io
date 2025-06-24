@@ -11,15 +11,16 @@ async function loadProjects() {
 
   try {
     const res = await axios.get('https://api.github.com/users/aryMello/repos?per_page=100');
-    const repos = res.data
-      .filter(r => pinnedRepos.includes(r.name) && !r.fork && !r.private);
+    const repos = res.data.filter(r =>
+      pinnedRepos.includes(r.name) && !r.fork && !r.private
+    );
 
     for (const r of repos) {
       let readmeText = '';
       try {
         const readmeRes = await axios.get(`https://api.github.com/repos/aryMello/${r.name}/readme`);
-        const decodedContent = atob(readmeRes.data.content);
-        readmeText = decodedContent.split('\n').slice(0, 5).join('\n'); // Show first 5 lines
+        const decodedContent = atob(readmeRes.data.content || '');
+        readmeText = decodedContent.split('\n').slice(0, 5).join('\n');
       } catch (err) {
         console.warn(`No README found for ${r.name}`, err);
         readmeText = r.description || 'No description provided.';
