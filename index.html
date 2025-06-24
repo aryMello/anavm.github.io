@@ -3,83 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ana Vieira de Melo – AI/ML Engineer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 0 1.5rem;
-      max-width: 900px;
-      margin: auto;
-      line-height: 1.6;
-    }
-    header {
-      padding: 2rem 0;
-      border-bottom: 1px solid #ccc;
-    }
-    h1 {
-      margin-bottom: 0.2rem;
-    }
-    .section {
-      margin-top: 2rem;
-    }
-    a {
-      color: #0066cc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .project {
-      margin-bottom: 1.2rem;
-    }
-  </style>
+  <title>Ary Mello • Developer Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-  <header>
-    <h1>Ana B. Vieira de Melo</h1>
-    <p><strong>Machine Learning & Data Engineer</strong> | Python · PyTorch · OpenCV · Spark · AWS</p>
-    <p>
-      <a href="https://github.com/aryMello" target="_blank">GitHub</a> |
-      <a href="https://www.linkedin.com/in/anavm/" target="_blank">LinkedIn</a>
-    </p>
+  <header id="hero">
+    <div class="container">
+      <img src="assets/logo.png" alt="Ary Mello Logo" class="logo"/>
+      <h1>Ary Mello</h1>
+      <p class="tagline">Quietly creating impact — I let curiosity and code do the talking.</p>
+      <a href="#projects" class="btn">See My Work</a>
+    </div>
   </header>
 
-  <section class="section">
-    <h2>💼 About Me</h2>
-    <p>
-      I'm a Machine Learning Engineer passionate about building real-world AI solutions in computer vision, recommendation systems, and data engineering. I specialize in Python, PyTorch, and cloud tools like AWS and Databricks.
-    </p>
-  </section>
-
-  <section class="section">
-    <h2>🚀 Featured Projects</h2>
-
-    <div class="project">
-      <strong><a href="https://github.com/aryMello/hands-on-ai-cv" target="_blank">hands-on-ai-cv</a></strong><br>
-      Real-time computer vision models using OpenCV + PyTorch, including object and face detection.
-    </div>
-
-    <div class="project">
-      <strong><a href="https://github.com/aryMello/rl-agents" target="_blank">rl-agents</a></strong><br>
-      DQN and A3C agents trained on OpenAI Gym environments like LunarLander and CartPole.
-    </div>
-
-    <div class="project">
-      <strong><a href="https://github.com/aryMello/recommender-system" target="_blank">recommender-system</a></strong><br>
-      Collaborative filtering recommender built using scikit-learn and MovieLens dataset.
-    </div>
-
-    <div class="project">
-      <strong><a href="https://github.com/aryMello/llm-rag-vector" target="_blank">llm-rag-vector</a></strong><br>
-      Retrieval-Augmented Generation pipeline using Hugging Face + FAISS.
+  <section id="projects">
+    <div class="container">
+      <h2>Featured Projects</h2>
+      <div id="projects-grid" class="grid"></div>
     </div>
   </section>
 
-  <section class="section">
-    <h2>📬 Contact</h2>
-    <p>Email: <em>onlinebea@hotmail.com</em></p>
+  <section id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>I’m building end‑to‑end AI pipelines, experimenting with LLMs, and navigating DataOps/MLOps workflows. I love solving problems with code and continuously learning.</p>
+      <div class="tech-stack">
+        <div class="tech">Python</div>
+        <div class="tech">PySpark</div>
+        <div class="tech">TensorFlow</div>
+        <div class="tech">OpenCV</div>
+        <div class="tech">Docker</div>
+        <div class="tech">Git</div>
+      </div>
+    </div>
   </section>
+
+  <footer>
+    <div class="container">
+      <p>Made with ❤️ by Ary Mello</p>
+      <div class="socials">
+        <a href="https://github.com/aryMello" target="_blank">GitHub</a>
+        <a href="www.linkedin.com/in/anavm" target="_blank">LinkedIn</a>
+        <a href="mailto:onlinebea@hotmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
