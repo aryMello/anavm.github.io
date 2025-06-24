@@ -15,33 +15,40 @@ async function loadProjects() {
       pinnedRepos.includes(r.name) && !r.fork && !r.private
     );
 
-    for (const r of repos) {
-      let readmeText = '';
+    for (const repo of repos) {
+      let summary = '';
+
       try {
-        const readmeRes = await axios.get(`https://api.github.com/repos/aryMello/${r.name}/readme`);
-        const decodedContent = atob(readmeRes.data.content || '');
-        readmeText = decodedContent.split('\n').slice(0, 5).join('\n');
-      } catch (err) {
-        console.warn(`No README found for ${r.name}`, err);
-        readmeText = r.description || 'No description provided.';
+        const readmeRes = await axios.get(`https://api.github.com/repos/aryMello/${repo.name}/readme`);
+        const decoded = atob(readmeRes.data.content || '');
+        summary = decoded
+          .split('\n')
+          .filter(line => line.trim() && !line.startsWith('#'))
+          .slice(0, 3)
+          .join(' ')
+          .replace(/\[(.*?)\]\(.*?\)/g, '$1'); // remove markdown links
+      } catch {
+        summary = repo.description || 'A code project without a detailed description.';
       }
 
       const card = document.createElement('div');
       card.className = 'project-card';
-      const imageUrl = `assets/${r.name}.png`;
+
+      const imageUrl = `assets/${repo.name}.png`;
+
       card.innerHTML = `
-        <img src="${imageUrl}" alt="${r.name}">
+        <img src="${imageUrl}" alt="${repo.name}">
         <div class="project-content">
-          <h3><a href="${r.html_url}" target="_blank">${r.name}</a></h3>
-          <pre>${readmeText}</pre>
-          <a href="${r.html_url}" target="_blank">View on GitHub →</a>
-        </div>`;
-      grid.append(card);
+          <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
+          <p class="project-summary">${summary}</p>
+          <a href="${repo.html_url}" target="_blank">View on GitHub →</a>
+        </div>
+      `;
+
+      grid.appendChild(card);
     }
-  } catch (e) {
-    console.error('Failed to fetch repos', e);
-    grid.innerHTML = '<p>Unable to load projects.</p>';
+  } catch (err) {
+    console.error('Error loading repositories:', err);
+    grid.innerHTML = `<p class="error-message">⚠️ Sorry, unable to load projects at this time.</p>`;
   }
 }
-
-document.addEventListener('DOMContentLoaded', loadProjects);
